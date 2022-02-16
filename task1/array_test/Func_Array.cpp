@@ -78,15 +78,16 @@ void print_array(int* array, int len)
 // The function counts the number of spaces occupied by spaces and tabs in a line
 // Parameter: string (str)
 // Return value: int
+// Uses function: bool IsSymbol(char)
 int count_space(string str)
 {
 	int count = 0;
 	int len = str.size();
 	for (int i = 0; i < len; i++)
 	{
-		if (IsSumbol(str[i]))
+		if (IsSymbol(str[i]))
 		{
-			while (IsSumbol(str[i]))
+			while (IsSymbol(str[i]))
 			{
 				i++;
 				if (i == len)
@@ -104,7 +105,7 @@ int count_space(string str)
 // You need to free the memory occupied by a dynamic array, when it is no longer needed!!!
 // Parameter: string of numbers separated by spaces and tabs (str)
 // Return value: pointer to dynamic array
-// Uses functions: int CountNumberInString(string), bool IsSumbol(char), int MyStringToInt(char*)
+// Uses functions: int CountNumberInString(string), bool IsSymbol(char), int MyStringToInt(char*)
 int* convertToInt(string str)
 {
 	char tmp[10] = {};
@@ -114,9 +115,9 @@ int* convertToInt(string str)
 	int j = 0;
 	for (int i = 0; i < str.size(); i++)
 	{
-		if (IsSumbol(str[i]))
+		if (IsSymbol(str[i]))
 		{
-			while (IsSumbol(str[i]))
+			while (IsSymbol(str[i]))
 			{
 				tmp[j] = str[i];
 				j++;
@@ -138,7 +139,7 @@ int* convertToInt(string str)
 // The function returns fals if the character is space or tab, otherwise it returns true
 // Parameter: char (letter)
 // Return value: bool
-bool IsSumbol(char letter)
+bool IsSymbol(char letter)
 {
 	if (letter == '\t') return false;
 	if (letter == ' ') return false;
@@ -173,6 +174,10 @@ int MyStringToInt(char* str) {
 	return sum;
 }
 
+// The function takes a symbol and returns a digit if the symbol is digit,
+// -1 if the symbol is a minus or -100 if the symbol is not a digit and not a minus
+// Parameter: char (c)
+// Return value: int
 int MyCharToInt(char c)
 {
 	switch (c)
@@ -204,6 +209,9 @@ int MyCharToInt(char c)
 	}
 }
 
+// The function takes a positive integer N, returns the number ten to the power of N
+// Parameter: int (power)
+// Return value: int
 int MyPowerInt(int power)
 {
 	int multi = 1;
@@ -215,6 +223,10 @@ int MyPowerInt(int power)
 	return multi;
 }
 
+// The function takes a string of numbers, returns the number of numbers in a string
+// Parameter: string of numbers separated by spaces and tabs (str)
+// Return value: int
+// Uses function: bool IsSymbol(char)
 int CountNumberInString(string str)
 {
 	int len = str.size();
@@ -222,14 +234,14 @@ int CountNumberInString(string str)
 	int countNumber = 0;
 	for (int i = 0; i < len; i++)
 	{
-		if (IsSumbol(str[i]) && isNumber)
+		if (IsSymbol(str[i]) && isNumber)
 		{
 			countNumber++;
 			isNumber = false;
 		}
 		else
 		{
-			if (i != 0 && !IsSumbol(str[i]) && IsSumbol(str[i-1]))
+			if (i != 0 && !IsSymbol(str[i]) && IsSymbol(str[i-1]))
 			{
 				isNumber = true;
 			}
@@ -238,6 +250,10 @@ int CountNumberInString(string str)
 	return countNumber;
 }
 
+// The function takes a pointer to an array and it's length and returns a structure
+// with the index of the maximum number and with the index of the minimum number
+// Parameters: pointer to array (array), array length (len)
+// Return value: struct minMaxIndex(int minIndex, int maxIndex)
 minMaxIndex FindMinMaxInArray(int* array, int len)
 {
 	minMaxIndex index = { 0, 0 };

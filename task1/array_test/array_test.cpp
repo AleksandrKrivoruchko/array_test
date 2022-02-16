@@ -9,40 +9,43 @@ int main()
 {
 	setlocale(0, "");
 	
+	//----------------TODO----------------------------------
 	// Creating an array and filling with random numbers
 	// The file (file1.txt) is overwritten at each programm startup
 	// The lengh of the array is entered by the user from the keyboard
 	// Writing this array to text file, numbers are separated by tabs
-	cout << "Введите количество элементов в массиве: ";
-	int len = 10;
-	if (!(cin >> len))
-	{
-		len = 10;
-	}
-	int* array = new int[len];
-	fill_array(array, len);
-	ofstream outfile("file1.txt");
-	if (outfile.is_open())
-	{
-		int k = 0;
-		for (int i = 0; i < len; i++)
-		{
-			k++;
-			outfile << array[i] << "\t";
-			if (k == 10)
-			{
-				outfile << "\n";
-				k = 0;
-			}
-		}
-	}
-	outfile.close();
+	//cout << "Введите количество элементов в массиве: ";
+	//int len = 10;
+	//if (!(cin >> len))
+	//{
+	//	len = 10;
+	//}
+	//int* array = new int[len];
+	//fill_array(array, len);
+	//ofstream outfile("file1.txt");
+	//if (outfile.is_open())
+	//{
+	//	int k = 0;
+	//	for (int i = 0; i < len; i++)
+	//	{
+	//		k++;
+	//		outfile << array[i] << "\t";
+	//		if (k == 10)
+	//		{
+	//			outfile << "\n";
+	//			k = 0;
+	//		}
+	//	}
+	//}
+	//outfile.close();
 
-	// Array output function to console
-	// Parameters: pointer to array (array) and array length (len)
-	print_array(array, len);
+	//// Array output function to console
+	//// Parameters: pointer to array (array) and array length (len)
+	//print_array(array, len);
 
-	delete[] array;
+	//delete[] array;
+	//--------------------------------------------------------------------
+
 	/*ifstream infile("file1.txt");
 	string in_str;
 	vector<string> tfile;
