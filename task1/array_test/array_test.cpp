@@ -9,7 +9,11 @@ int main()
 {
 	setlocale(0, "");
 	
-	/*cout << "Введите количество элементов в массиве: ";
+	// Creating an array and filling with random numbers
+	// The file (file1.txt) is overwritten at each programm startup
+	// The lengh of the array is entered by the user from the keyboard
+	// Writing this array to text file, numbers are separated by tabs
+	cout << "Введите количество элементов в массиве: ";
 	int len = 10;
 	if (!(cin >> len))
 	{
@@ -31,25 +35,15 @@ int main()
 				k = 0;
 			}
 		}
-		outfile << "\n";
-		fill_array(array, len);
-		k = 0;
-		for (int i = 0; i < len; i++)
-		{
-			k++;
-			outfile << array[i] << "\t";
-			if (k == 10)
-			{
-				outfile << "\n";
-				k = 0;
-			}
-		}
 	}
-
 	outfile.close();
 
-	print_array(array, len);*/
-	ifstream infile("file1.txt");
+	// Array output function to console
+	// Parameters: pointer to array (array) and array length (len)
+	print_array(array, len);
+
+	delete[] array;
+	/*ifstream infile("file1.txt");
 	string in_str;
 	vector<string> tfile;
 	if (infile.is_open())
@@ -102,7 +96,7 @@ int main()
 
 	cout << endl << endl;
 	print_array(arrayInt, arrayLen);
-	cout << endl << endl;
+	cout << endl << endl;*/
 
 	/*minMaxIndex element = FindMinMaxInArray(arrayInt, arrayLen);
 	cout << endl << "Максимальный элемент массива " << arrayInt[element.maxIndex] << endl;
@@ -114,7 +108,7 @@ int main()
 	cout << endl;
 	print_array(arrayInt, arrayLen);*/
 
-	delete[] arrayInt;
+	//delete[] arrayInt;
 	cout << endl << endl;
 	int lenArray = 100, min = -200, max = 200;
 	int* ptrArray = CreateArrayInt(lenArray, min, max);

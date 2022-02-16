@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// Function to fill an array with random numbers from -100 to 100
+// Parameters: pointer to array (array) and array length (len)
 void fill_array(int* array, int len)
 {
 	random_device rd;
@@ -11,33 +13,40 @@ void fill_array(int* array, int len)
 		*array++ = dist(gen);
 }
 
+// The function creates a dynamic array
+// Parameters: array length (len), minimum range number to fill array (min), maximum range number (max)
+// The length of the array must be less than the range of numbers to fill array (len <= max - min)
+// Return value: pointer to dynamic array
+// You need to free the memory occupied by a dynamic array, when it is no longer needed!!!
+// To work, the function bool IsOverlap(int*, int , int) is used
 int* CreateArrayInt(int len, int min, int max)
 {
 	int* ptrArray = new int[len];
-	int* tmp = ptrArray;
 	random_device rd;
 	mt19937 gen(rd());
 	uniform_int_distribution<> dist(min, max);
 	int temp = 0;
-	*tmp++ = dist(gen);
+	*(ptrArray++) = dist(gen);
 	for (int i = 1; i < len; i++)
 	{
 		temp = dist(gen);
-		if (IsOverlap(ptrArray, temp, i))
+		if (IsOverlap(ptrArray-i, temp, i))
 		{
 			i--;
 			continue;
 		}
 		else
 		{
-			*tmp++ = temp;
+			*(ptrArray++) = temp;
 		}
 	}
-	cout << "указатель на выделенную память - " << ptrArray  << endl;
-	cout << "указатель на массив - " << tmp - len << endl;
-	return ptrArray;
+
+	return ptrArray - len;
 }
 
+// The function returns true if the desired number is in the array, otherwise - false
+// Parameters: pointer to array (array), desired value (value), array length (len)
+// Return value: bool (true or false)
 bool IsOverlap(int* array, int value, int len)
 {
 	for (int i = 0; i < len; i++)
@@ -48,6 +57,8 @@ bool IsOverlap(int* array, int value, int len)
 	return false;
 }
 
+// Array output function to console
+// Parameters: pointer to array (array) and array length (len)
 void print_array(int* array, int len)
 {
 	int k = 0;
@@ -64,11 +75,13 @@ void print_array(int* array, int len)
 	cout << endl;
 }
 
+// The function counts the number of spaces occupied by spaces and tabs in a line
+// Parameter: string (str)
+// Return value: int
 int count_space(string str)
 {
 	int count = 0;
 	int len = str.size();
-	//cout << endl << len << " in count_space" << endl;
 	for (int i = 0; i < len; i++)
 	{
 		if (IsSumbol(str[i]))
@@ -87,10 +100,14 @@ int count_space(string str)
 	return count;
 }
 
+// The function takes a string of numbers, returns a pointer to a dynamic arraay of numbers
+// You need to free the memory occupied by a dynamic array, when it is no longer needed!!!
+// Parameter: string of numbers separated by spaces and tabs (str)
+// Return value: pointer to dynamic array
+// Uses functions: int CountNumberInString(string), bool IsSumbol(char), int MyStringToInt(char*)
 int* convertToInt(string str)
 {
 	char tmp[10] = {};
-	/*int len = count_space(str, sumbol);*/
 	int len = CountNumberInString(str);
 	int* ar = new int[len];
 	int k = 0;
@@ -118,6 +135,9 @@ int* convertToInt(string str)
 	return ar;
 }
 
+// The function returns fals if the character is space or tab, otherwise it returns true
+// Parameter: char (letter)
+// Return value: bool
 bool IsSumbol(char letter)
 {
 	if (letter == '\t') return false;
@@ -125,6 +145,10 @@ bool IsSumbol(char letter)
 	return true;
 }
 
+// The function takes a pointer to an array of characters of digits of a number, returns a number
+// Parameter: pointer to characters array (str)
+// Return value: int
+// Uses functions: int MyCharToInt(char), int MyPowerInt(int)
 int MyStringToInt(char* str) {
 	int len = strlen(str);
 	int k = 0, sum = 0;
