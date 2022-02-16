@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// Function to fill an array with random numbers from -100 to 100
+// Parameters: pointer to array (array) and array length (len)
 void fill_array(int* array, int len)
 {
 	random_device rd;
@@ -11,31 +13,33 @@ void fill_array(int* array, int len)
 		*array++ = dist(gen);
 }
 
+// The function creates a dynamic array
+// Parameter: array length (len), minimum range number to fill array (min), maximum range number (max)
+// Return value: pointer to array
+// You need to free the memory occupied by a dynamic array, when it is no longer needed!!!
 int* CreateArrayInt(int len, int min, int max)
 {
 	int* ptrArray = new int[len];
-	int* tmp = ptrArray;
 	random_device rd;
 	mt19937 gen(rd());
 	uniform_int_distribution<> dist(min, max);
 	int temp = 0;
-	*tmp++ = dist(gen);
+	*(ptrArray++) = dist(gen);
 	for (int i = 1; i < len; i++)
 	{
 		temp = dist(gen);
-		if (IsOverlap(ptrArray, temp, i))
+		if (IsOverlap(ptrArray-i, temp, i))
 		{
 			i--;
 			continue;
 		}
 		else
 		{
-			*tmp++ = temp;
+			*(ptrArray++) = temp;
 		}
 	}
-	cout << "указатель на выделенную память - " << ptrArray  << endl;
-	cout << "указатель на массив - " << tmp - len << endl;
-	return ptrArray;
+
+	return ptrArray - len;
 }
 
 bool IsOverlap(int* array, int value, int len)
@@ -48,6 +52,8 @@ bool IsOverlap(int* array, int value, int len)
 	return false;
 }
 
+// Array output function to console
+// Parameters: pointer to array (array) and array length (len)
 void print_array(int* array, int len)
 {
 	int k = 0;
@@ -68,7 +74,6 @@ int count_space(string str)
 {
 	int count = 0;
 	int len = str.size();
-	//cout << endl << len << " in count_space" << endl;
 	for (int i = 0; i < len; i++)
 	{
 		if (IsSumbol(str[i]))
@@ -90,7 +95,6 @@ int count_space(string str)
 int* convertToInt(string str)
 {
 	char tmp[10] = {};
-	/*int len = count_space(str, sumbol);*/
 	int len = CountNumberInString(str);
 	int* ar = new int[len];
 	int k = 0;
